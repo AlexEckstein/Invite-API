@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous" />
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.0.3/css/font-awesome.css" />
+
+    <style>
+        .container {
+            padding: 2rem 0rem;
+        }
+
+        @media (min-width: 576px) {
+            .modal-dialog {
+                max-width: 400px;
+
+                .modal-content {
+                    padding: 1rem;
+                }
+            }
+        }
+
+        .modal-header {
+            .close {
+                margin-top: -1.5rem;
+            }
+        }
+
+        .form-title {
+            margin: -2rem 0rem 2rem;
+        }
+
+        .btn-round {
+            border-radius: 3rem;
+        }
+
+        .delimiter {
+            padding: 1rem;
+        }
+
+        .social-buttons {
+            .btn {
+                margin: 0 0.5rem 1rem;
+            }
+        }
+
+        .signup-section {
+            padding: 0.3rem 0rem;
+        }
+
+        .error-message {
+            color: red;
+        }
+    </style>
+    <title>Verification Step</title>
+</head>
+
+<body>
+    <span>
+        This is home page...
+    </span>
+    <!-- Step 1 Email -->
+    <div class="modal fade" id="enter-email" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header border-bottom-0">
+                    <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button> -->
+                </div>
+                <div class="modal-body">
+                    <div class="form-title text-center mb-4">
+                        <h5>Email your email to get your access code</h5>
+                    </div>
+                    <div class="d-flex flex-column text-center">
+                        <form>
+                            <div class="form-group">
+                                <span class="error-message" id="email-message"></span>
+                                <input type="email" class="form-control" id="enter-email-input"
+                                    placeholder="Enter Email">
+                            </div>
+                            <button type="button" class="btn btn-info btn-block btn-round"
+                                id="enter-email-button">Send</button>
+                            <button type="button" class="btn btn-block btn-light" id="switch-email-button">Verify by
+                                phone</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Step 1 Email Exists-->
+    <div class="modal fade" id="email-exist" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header border-bottom-0">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-title text-center mb-4">
+                        <h5>Looks like you have already been verified.</h5>
+                    </div>
+                    <div class="d-flex flex-column text-center">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Step 1 Email Enter Code-->
+    <div class="modal fade" id="verify-email" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header border-bottom-0">
+                    <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button> -->
+                </div>
+                <div class="modal-body">
+                    <div class="form-title text-center mb-4">
+                        <h5>Check your email for the access code we just sent</h5>
+                    </div>
+                    <div class="d-flex flex-column text-center">
+                        <form>
+                            <div class="form-group">
+                                <span class="error-message" id="verify-email-message"></span>
+                                <input type="email" class="form-control" id="verify-email-input"
+                                    placeholder="Enter Access Code">
+                            </div>
+                            <button type="button" class="btn btn-info btn-block btn-round"
+                                id="verify-email-button">Verify</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Step 1 Email Success-->
+    <div class="modal fade" id="verify-email-complete" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header border-bottom-0">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-title text-center mb-4">
+                        <h5>Thanks for verifying you can now enter the site</h5>
+                    </div>
+                    <div class="d-flex flex-column text-center">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Step 1 Phone -->
+    <div class="modal fade" id="enter-phone" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header border-bottom-0">
+                    <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button> -->
+                </div>
+                <div class="modal-body">
+                    <div class="form-title text-center mb-4">
+                        <h5>Enter your phone number to get your access code sent by text message</h5>
+                    </div>
+                    <div class="d-flex flex-column text-center">
+                        <form>
+                            <div class="form-group">
+                                <span class="error-message" id="phone-message"></span>
+                                <input type="tel" class="form-control" id="enter-phone-input"
+                                    placeholder="Enter Phone Number" pattern="[0-9]{3}[0-9]{3}[0-9]{4}">
+                            </div>
+                            <button type="button" class="btn btn-info btn-block btn-round"
+                                id="enter-phone-button">Send</button>
+                            <button type="button" class="btn btn-block btn-light" id="switch-phone-button">Verify by
+                                email</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Step 1 Phone Exists-->
+    <div class="modal fade" id="phone-exist" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header border-bottom-0">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-title text-center mb-4">
+                        <h5>Looks like you have already been verified.</h5>
+                    </div>
+                    <div class="d-flex flex-column text-center">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Step 1 Phone Enter Code-->
+    <div class="modal fade" id="verify-phone" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header border-bottom-0">
+                    <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button> -->
+                </div>
+                <div class="modal-body">
+                    <div class="form-title text-center mb-4">
+                        <h5>Check your text messages for the access code we just sent</h5>
+                    </div>
+                    <div class="d-flex flex-column text-center">
+                        <form>
+                            <div class="form-group">
+                                <span class="error-message" id="verify-phone-message"></span>
+                                <input type="email" class="form-control" id="verify-phone-input"
+                                    placeholder="Enter Access Code">
+                            </div>
+                            <button type="button" class="btn btn-info btn-block btn-round"
+                                id="verify-phone-button">Verify</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Step 1 Phone Success-->
+    <div class="modal fade" id="verify-phone-complete" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header border-bottom-0">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-title text-center mb-4">
+                        <h5>Thanks for verifying you can now enter the site</h5>
+                    </div>
+                    <div class="d-flex flex-column text-center">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
+    </script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous">
+    </script>
+    <script>
+        $(window).on('load', function () {
+            if (!localStorage.getItem("cookiee")) {
+                switch (localStorage.getItem("state")) {
+                    case 'email 1':
+                        $('#enter-email').modal({
+                            backdrop: 'static',
+                            keyboard: false
+                        });
+                        break;
+                    case 'email 2':
+                        $('#verify-email').modal({
+                            backdrop: 'static',
+                            keyboard: false
+                        });
+                        break;
+                    case 'phone 1':
+                        $('#enter-phone').modal({
+                            backdrop: 'static',
+                            keyboard: false
+                        });
+                        break;
+                    case 'phone 2':
+                        $('#verify-phone').modal({
+                            backdrop: 'static',
+                            keyboard: false
+                        });
+                        break;
+                    default:
+                        $('#enter-email').modal({
+                            backdrop: 'static',
+                            keyboard: false
+                        });
+                        break;
+                }
+            }
+        });
+
+        function validateEmail(emailValue) {
+            if (!emailValue) return false;
+            var re =
+                /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+            return re.test(String(emailValue).toLowerCase());
+        }
+
+        function validatePhone(phoneValue) {
+            var phoneno = /^\+?([0-9]{2})\)?[-. ]?([0-9]{4})[-. ]?([0-9]{4})$/;
+            if (phoneValue.match(phoneno)) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+
+        $('#switch-email-button').on('click', function () {
+            $('#enter-email').modal('hide');
+            $('#enter-phone').modal({
+                backdrop: 'static',
+                keyboard: false
+            })
+            localStorage.setItem("state", 'phone 1')
+        })
+
+        $('#switch-phone-button').on('click', function () {
+            $('#enter-phone').modal('hide');
+            $('#enter-email').modal({
+                backdrop: 'static',
+                keyboard: false
+            })
+            localStorage.setItem("state", 'email 1')
+        })
+
+        $('.form-control').on('keydown', function () {
+            $('#email-message').text("");
+            $('#phone-message').text("");
+            $('#verify-email-message').text("");
+            $('#verify-phone-message').text("");
+        })
+
+        $('#enter-email-button').on('click', function () {
+            if (validateEmail($('#enter-email-input').val())) {
+                var requestData = {
+                    email: $('#enter-email-input').val(),
+                    key: "P38lflI1VC1aHTuk"
+                }
+                $.ajax({
+                    type: "POST",
+                    url: "https://api.whoamedia.com/dev/test-generate",
+                    data: requestData,
+                    success: function (data) {
+                        if (data.success === true) {
+                            $('#enter-email').modal('hide');
+                            if (data.data.previous_verification) {
+                                $('#email-exist').modal('show');
+                            } else {
+                                $('#verify-email').modal({
+                                    backdrop: 'static',
+                                    keyboard: false
+                                });
+                                localStorage.setItem("state", 'email 2')
+                                localStorage.setItem("email", $('#enter-email-input').val())
+                            }
+                        } else {
+                            $('#enter-email-input').val('Failed! Please try again!');
+                        }
+                    }
+                })
+            } else {
+                $('#email-message').text("Invalid email!");
+                $('#enter-email-input').val('');
+            }
+        });
+
+        $('#verify-email-button').on('click', function () {
+            var verifyData = {
+                email: localStorage.getItem("email"),
+                key: "P38lflI1VC1aHTuk",
+                code: $('#verify-email-input').val()
+            }
+            $.ajax({
+                type: "POST",
+                url: "https://api.whoamedia.com/dev/test-verify",
+                data: verifyData,
+                success: function (data) {
+                    if (data.success === true) {
+                        $('#verify-email').modal('hide');
+                        localStorage.removeItem("state")
+                        localStorage.removeItem("email")
+                        localStorage.setItem("cookiee", data.request.email);
+                        $('#verify-email-complete').modal('show');
+                        setTimeout(() => {
+                            $('#verify-email-complete').modal('hide');
+                        }, 1000)
+                    } else {
+                        $('#verify-email-message').text("Failed! Please try again!");
+                        $('#verify-email-input').val('');
+                    }
+                },
+                error: function (data) {
+                    $('#verify-email-message').text(
+                        "Maximum attempt limit! Please wait and try again!");
+                }
+            })
+        })
+
+        $('#enter-phone-button').on('click', function () {
+            if (validatePhone($('#enter-phone-input').val())) {
+                var requestData = {
+                    phone: $('#enter-phone-input').val(),
+                    key: "P38lflI1VC1aHTuk"
+                }
+                $.ajax({
+                    type: "POST",
+                    url: "https://api.whoamedia.com/dev/test-generate",
+                    data: requestData,
+                    success: function (data) {
+                        if (data.success === true) {
+                            $('#enter-phone').modal('hide');
+                            if (data.data.previous_verification) {
+                                $('#phone-exist').modal('show');
+                            } else {
+                                $('#verify-phone').modal({
+                                    backdrop: 'static',
+                                    keyboard: false
+                                });
+                                localStorage.setItem("phone", $('#enter-phone-input').val())
+                                localStorage.setItem("state", 'phone 2')
+                            }
+                        } else {
+                            $('#enter-phone-input').val('Failed! Please try again!');
+                        }
+                    }
+                })
+            } else {
+                $('#phone-message').text("Invalid phone number!");
+                $('#enter-phone-input').val('');
+            }
+        });
+
+        $('#verify-phone-button').on('click', function () {
+            var verifyData = {
+                phone: localStorage.getItem("phone"),
+                key: "P38lflI1VC1aHTuk",
+                code: $('#verify-phone-input').val()
+            }
+            $.ajax({
+                type: "POST",
+                url: "https://api.whoamedia.com/dev/test-verify",
+                data: verifyData,
+                success: function (data) {
+                    if (data.success === true) {
+                        $('#verify-phone').modal('hide');
+                        localStorage.removeItem("phone")
+                        localStorage.removeItem("state")
+                        localStorage.setItem("cookiee", data.request.phone);
+                        $('#verify-phone-complete').modal('show');
+                        setTimeout(() => {
+                            $('#verify-phone-complete').modal('hide');
+                        }, 1000)
+                    } else {
+                        $('#verify-phone-message').text("Failed! Please try again!");
+                        $('#verify-phone-input').val('');
+                    }
+                },
+                error: function (data) {
+                    $('#verify-phone-message').text(
+                        "Maximum attempt limit! Please wait and try again!");
+                }
+            })
+        })
+    </script>
+</body>
+
+</html>
